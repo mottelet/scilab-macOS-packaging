@@ -1,0 +1,10 @@
+cd Contents/lib/thirdparty
+dylibs=`find .  *.dylib -type f`
+for dylib in $dylibs; do
+  echo $dylib 
+  install_name_tool -id `basename $dylib` $dylib
+  dependencies=`otool -L $dylib | grep "/sw/lib" | awk -F' ' '{ print $1 }'`
+  for alib in $dependencies; do
+      install_name_tool -change $alib @executable_path/../lib/thirdparty/`basename $alib` $dylib
+  done
+done

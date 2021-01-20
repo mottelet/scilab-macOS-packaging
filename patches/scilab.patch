@@ -1,0 +1,40 @@
+320,322c320,321
+<     # For Mac OS X, Since path are different from the JVM normal tree,
+<     # don't need to detect the CPU
+<     JAVA_SHLIB="libjava.jnilib"
+---
+>     # For Mac OS X, we eventually prompt the user 
+>     # to install the JRE at first run
+324c323,330
+<       JAVA_HOME=$(/usr/libexec/java_home --arch x86_64 --failfast --version 1.8+)
+---
+>         JAVA_HOME=`/usr/libexec/java_home -F -v 1.8`
+>         if test -z "$JAVA_HOME"; then
+>             open -W jre/Scilab\ JRE\ Install.app
+>             JAVA_HOME=`/usr/libexec/java_home -F -v 1.8`
+>             if test -z "$JAVA_HOME"; then
+>                 exit 1
+>             fi        
+>         fi
+325a332,342
+>     
+>     JNIcap=$(xmllint --xpath "//key[text()='JVMCapabilities']/following-sibling::array/*[text()='JNI']" $JAVA_HOME/../Info.plist)
+>     if [ -d "$JAVA_HOME/jre" ] && [ ! -e $JAVA_HOME/libserver.dylib  ] || test -z "$JNIcap"; then
+>         # Oracle JDK or AdoptOpenJDK, likely
+>         open -W jre/Scilab\ JRE\ Install.app
+>         JNIcap=$(xmllint --xpath "//key[text()='JVMCapabilities']/following-sibling::array/*[text()='JNI']" $JAVA_HOME/../Info.plist)
+>         if [ -d "$JAVA_HOME/jre" ] && [ ! -e $JAVA_HOME/libserver.dylib  ] || test -z "$JNIcap"; then
+>             exit 1
+>         fi
+>     fi
+>     
+328,329d344
+<     DYLD_LIBRARY_PATH="$JAVA_HOME/../Libraries${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
+< 
+354,356c369,370
+<                 # JRE is now embedded in Mac OS X binary version
+<                 #set_macosx_java_vm
+<                 JAVA_HOME=$SCIBINARYBASE/thirdparty/java/Contents/Home/
+---
+>                 # JRE is not embedded in Mac OS X binary version
+>                 set_macosx_java_vm

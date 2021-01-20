@@ -1,0 +1,13 @@
+#!/bin/sh
+
+dependencies=`otool -L $1 | grep "/sw/lib" | awk -F' ' '{ print $1 }'`
+for alib in $dependencies; do
+    #echo "$alib -> @executable_path/../lib/thirdparty/`basename $alib`"
+    install_name_tool -change $alib @executable_path/../lib/thirdparty/`basename $alib` $1
+done
+
+dependencies=`otool -L $1 | grep "/lib/scilab/" | awk -F' ' '{ print $1 }'`
+for alib in $dependencies; do
+    #echo "$alib -> @executable_path/../lib/thirdparty/`basename $alib`"
+    install_name_tool -change $alib @executable_path/../lib/scilab/`basename $alib` $1
+done

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
+	<key>CFBundleDisplayName</key>
+	<string>Scilab</string>
+	<key>CFBundleShortVersionString</key>
+	<string>branch-6.1</string>
+	<key>CFBundleVersion</key>
+	<string>branch-6.1</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleExecutable</key>
+	<string>scilab</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Scilab branch-6.1 © 2017-2020 ESI-Group and contributors</string>
+	<key>CFBundleIconFile</key>
+	<string>scilab</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.scilab.modules.jvm.Scilab</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Scilab</string>
+  <key>NSHighResolutionCapable</key>
+  <true/>
+</dict>
+</plist>
